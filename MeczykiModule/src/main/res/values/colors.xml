@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimaryLight">#00afc1</color>
+
+    <color name="separator">#500097a7</color>
+
+    <color name="colorPrimary">#0097a7</color>
+    <color name="colorPrimaryDark">#006064</color>
+</resources>
