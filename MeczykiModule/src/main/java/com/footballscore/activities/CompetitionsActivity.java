@@ -6,12 +6,10 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.transition.Explode;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 
 import com.footballscore.R;
 import com.footballscore.adapters.CompetitionsAdapter;
@@ -46,7 +44,7 @@ public class CompetitionsActivity extends BaseActivity {
         NetworkManager networkManager = new NetworkManager(this, true);
         networkManager.setDelay(500);
         networkManager.addRequest(onCreateCompetitionsRequest());
-        networkManager.setNetworkManagerCallbacks(networkManagerCallbacks);
+        networkManager.setNetworkManagerCallbacks(this.networkManagerCallbacks);
         networkManager.execute();
     }
 
@@ -123,7 +121,7 @@ public class CompetitionsActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                finish();
+                this.moveTaskToBack(true);
                 return true;
             case R.id.season2015:
                 onCreateSeason(2015);
@@ -143,5 +141,10 @@ public class CompetitionsActivity extends BaseActivity {
         competitionsAdapter.clearAdapter();
 
         this.onCreateCompetitionList();
+    }
+
+    @Override
+    public void onBackPressed() {
+        this.moveTaskToBack(true);
     }
 }
