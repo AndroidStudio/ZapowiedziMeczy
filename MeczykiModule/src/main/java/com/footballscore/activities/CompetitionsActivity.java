@@ -6,10 +6,12 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.transition.Explode;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 
 import com.footballscore.R;
 import com.footballscore.adapters.CompetitionsAdapter;
@@ -53,11 +55,13 @@ public class CompetitionsActivity extends BaseActivity {
             @Override
             public void onResult(ArrayList<CompetitionsModel> result) throws Exception {
                 RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-                CompetitionsAdapter competitionsAdapter = (CompetitionsAdapter) recyclerView.getAdapter();
-                competitionsAdapter.setCompetitionsModelArrayList(result);
+                if (recyclerView != null) {
+                    CompetitionsAdapter competitionsAdapter = (CompetitionsAdapter) recyclerView.getAdapter();
+                    competitionsAdapter.setCompetitionsModelArrayList(result);
 
-                if (result.size() < 1) {
-                    findViewById(R.id.noResultsLayout).setVisibility(View.VISIBLE);
+                    if (result.size() < 1) {
+                        findViewById(R.id.noResultsLayout).setVisibility(View.VISIBLE);
+                    }
                 }
             }
         };
@@ -126,9 +130,6 @@ public class CompetitionsActivity extends BaseActivity {
                 return true;
             case R.id.season2016:
                 onCreateSeason(2016);
-                return true;
-            case R.id.season2017:
-                onCreateSeason(2017);
                 return true;
         }
         return super.onOptionsItemSelected(item);

@@ -6,17 +6,22 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.transition.Explode;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 
 import com.footballscore.R;
 import com.footballscore.adapters.LeagueTableAdapter;
 import com.footballscore.models.CompetitionsModel;
+import com.footballscore.models.LeagueTableModel;
 import com.footballscore.requests.LeagueTableRequest;
 import com.footballscore.utils.Constants;
 import com.footballscore.utils.DividerItemDecoration;
 import com.network.library.NetworkManager;
 import com.network.library.NetworkManagerCallbacks;
+
+import java.util.ArrayList;
 
 /**
  * Created by Przemysław Skitał on 2016-07-17.
@@ -33,16 +38,28 @@ public class LeagueTableActivity extends BaseActivity {
     }
 
     private void onCreateLeagueTable() {
-        String id = ((CompetitionsModel) getIntent().getSerializableExtra(Constants.COMPETITION_MODEL)).getId();
-        LeagueTableRequest leagueTableRequest = new LeagueTableRequest(id) {
-
-        };
-
         NetworkManager networkManager = new NetworkManager(this, true);
         networkManager.setDelay(500);
-        networkManager.addRequest(leagueTableRequest);
-        networkManager.setNetworkManagerCallbacks(networkManagerCallbacks);
+        networkManager.addRequest(onCreateLeagueTableRequest());
+        networkManager.setNetworkManagerCallbacks(this.networkManagerCallbacks);
         networkManager.execute();
+    }
+
+    private LeagueTableRequest onCreateLeagueTableRequest() {
+        return new LeagueTableRequest(getCompetitionsId()) {
+            @Override
+            public void onResult(ArrayList<LeagueTableModel> leagueTableModelArrayList) throws Exception {
+                RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+                if (recyclerView != null) {
+                    LeagueTableAdapter leagueTableAdapter = (LeagueTableAdapter) recyclerView.getAdapter();
+                    leagueTableAdapter.setLeagueTableModelList(leagueTableModelArrayList);
+
+                    if (leagueTableModelArrayList.size() < 1) {
+                        findViewById(R.id.noResultsLayout).setVisibility(View.VISIBLE);
+                    }
+                }
+            }
+        };
     }
 
     private final NetworkManagerCallbacks networkManagerCallbacks = new NetworkManagerCallbacks() {
@@ -78,10 +95,11 @@ public class LeagueTableActivity extends BaseActivity {
     }
 
     private void onCreateToolbar() {
+        CompetitionsModel competitionsModel = (CompetitionsModel) getIntent().getSerializableExtra(Constants.COMPETITION_MODEL);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("Table");
+        toolbar.setTitle(competitionsModel.getCaption());
 
-        setSupportActionBar(toolbar);
+        this.setSupportActionBar(toolbar);
         ActionBar supportActionBar = getSupportActionBar();
         if (supportActionBar != null) {
             supportActionBar.setDisplayShowTitleEnabled(true);
@@ -96,7 +114,10 @@ public class LeagueTableActivity extends BaseActivity {
                 finish();
                 return true;
         }
-
         return super.onOptionsItemSelected(item);
+    }
+
+    public String getCompetitionsId() {
+        return ((CompetitionsModel) getIntent().getSerializableExtra(Constants.COMPETITION_MODEL)).getId();
     }
 }

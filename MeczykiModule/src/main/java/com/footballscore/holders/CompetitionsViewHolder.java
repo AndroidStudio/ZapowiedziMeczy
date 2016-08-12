@@ -51,7 +51,7 @@ public class CompetitionsViewHolder extends RecyclerView.ViewHolder {
         this.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, FixturesActivity.class);
+                Intent intent = new Intent(context, LeagueTableActivity.class);
                 intent.putExtra(Constants.COMPETITION_MODEL, competitionsModel);
                 context.startActivity(intent);
             }
@@ -67,12 +67,10 @@ public class CompetitionsViewHolder extends RecyclerView.ViewHolder {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
-                    case R.id.actionShowTable:
-                        Intent intent = new Intent(context, LeagueTableActivity.class);
+                    case R.id.actionFixtures:
+                        Intent intent = new Intent(context, FixturesActivity.class);
                         intent.putExtra(Constants.COMPETITION_MODEL, competitionsModel);
                         context.startActivity(intent);
-                        break;
-                    case R.id.actionShowTeams:
                         break;
                 }
                 return true;
