@@ -3,6 +3,7 @@ package com.footballscore.activities;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
@@ -11,6 +12,7 @@ import com.footballscore.adapters.FixturesViewPageAdapter;
 import com.footballscore.models.CompetitionsModel;
 import com.footballscore.utils.Constants;
 import com.footballscore.utils.MainTabListener;
+import com.purplebrain.adbuddiz.sdk.AdBuddiz;
 
 public class FixturesActivity extends BaseActivity {
 
@@ -20,6 +22,11 @@ public class FixturesActivity extends BaseActivity {
         this.setContentView(R.layout.fixtures_activity);
         this.onCreateToolbar();
         this.onCreateViewPager();
+        this.onCreateAdd();
+    }
+
+    private void onCreateAdd() {
+        AdBuddiz.showAd(this);
     }
 
     private void onCreateViewPager() {
@@ -38,9 +45,12 @@ public class FixturesActivity extends BaseActivity {
         toolbar.setTitle(getCompetitionModel().getCaption().toUpperCase());
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
+        ActionBar supportActionBar = getSupportActionBar();
+        if (supportActionBar != null) {
+            supportActionBar.setDisplayHomeAsUpEnabled(true);
+            supportActionBar.setDisplayShowTitleEnabled(true);
+            supportActionBar.setHomeButtonEnabled(true);
+        }
     }
 
     @Override

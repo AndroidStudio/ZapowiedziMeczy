@@ -16,6 +16,9 @@ import com.footballscore.adapters.CompetitionsAdapter;
 import com.footballscore.models.CompetitionsModel;
 import com.footballscore.requests.CompetitionsRequest;
 import com.footballscore.utils.DividerItemDecoration;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.network.library.NetworkManager;
 import com.network.library.NetworkManagerCallbacks;
 
@@ -36,6 +39,21 @@ public class CompetitionsActivity extends BaseActivity {
         this.onCreateToolbar();
         this.onCreateRecyclerView();
         this.onCreateCompetitionList();
+        this.onCreateAdMobAdds();
+    }
+
+    private void onCreateAdMobAdds() {
+        MobileAds.initialize(getApplicationContext(), getString(R.string.banner_ad_unit_id));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        AdView adView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice("9FD2F0928FB93CC5DE66EFCB517DCBD0")
+                .build();
+        adView.loadAd(adRequest);
     }
 
     private void onCreateCompetitionList() {
@@ -70,7 +88,7 @@ public class CompetitionsActivity extends BaseActivity {
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.addItemDecoration(new DividerItemDecoration(getDrawable(R.drawable.separator)));
+        recyclerView.addItemDecoration(new DividerItemDecoration(getResources().getDrawable(R.drawable.separator)));
         recyclerView.setAdapter(competitionsAdapter);
     }
 
@@ -141,10 +159,5 @@ public class CompetitionsActivity extends BaseActivity {
         competitionsAdapter.clearAdapter();
 
         this.onCreateCompetitionList();
-    }
-
-    @Override
-    public void onBackPressed() {
-        this.moveTaskToBack(true);
     }
 }

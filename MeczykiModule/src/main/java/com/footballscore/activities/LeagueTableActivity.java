@@ -6,10 +6,8 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.transition.Explode;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 
 import com.footballscore.R;
 import com.footballscore.adapters.LeagueTableAdapter;
@@ -20,6 +18,7 @@ import com.footballscore.utils.Constants;
 import com.footballscore.utils.DividerItemDecoration;
 import com.network.library.NetworkManager;
 import com.network.library.NetworkManagerCallbacks;
+import com.purplebrain.adbuddiz.sdk.AdBuddiz;
 
 import java.util.ArrayList;
 
@@ -35,6 +34,11 @@ public class LeagueTableActivity extends BaseActivity {
         this.onCreateToolbar();
         this.onCreateRecyclerView();
         this.onCreateLeagueTable();
+        this.onCreateAdd();
+    }
+
+    private void onCreateAdd() {
+        AdBuddiz.showAd(this);
     }
 
     private void onCreateLeagueTable() {
@@ -90,7 +94,7 @@ public class LeagueTableActivity extends BaseActivity {
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.addItemDecoration(new DividerItemDecoration(getDrawable(R.drawable.separator)));
+        recyclerView.addItemDecoration(new DividerItemDecoration(getResources().getDrawable(R.drawable.separator)));
         recyclerView.setAdapter(leagueTableAdapter);
     }
 
@@ -100,6 +104,7 @@ public class LeagueTableActivity extends BaseActivity {
         toolbar.setTitle(competitionsModel.getCaption());
 
         this.setSupportActionBar(toolbar);
+
         ActionBar supportActionBar = getSupportActionBar();
         if (supportActionBar != null) {
             supportActionBar.setDisplayShowTitleEnabled(true);

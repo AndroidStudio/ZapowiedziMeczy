@@ -38,7 +38,7 @@ public class LeagueTableRequest extends RequestCreator<ArrayList<LeagueTableMode
 
     @Override
     public void onCreateRequestHeaders(RequestHeaders requestHeaders) {
-
+        requestHeaders.put("X-Auth-Token", "55bb23829b4e427db740f6fcc471e26b");
     }
 
     @Override

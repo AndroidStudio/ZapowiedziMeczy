@@ -70,7 +70,7 @@ public class CompetitionsRequest extends RequestCreator<ArrayList<CompetitionsMo
 
             String id = jsonObject.getString("id");
             String caption = jsonObject.getString("caption");
-            if (caption.contains("European")) {
+            if (caption.contains("European") || caption.contains("Pokal") || caption.contains("Champions League")) {
                 continue;
             }
             String currentMatchday = jsonObject.getString("currentMatchday");

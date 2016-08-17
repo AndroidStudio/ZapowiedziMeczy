@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Football previews</string>
     <string name="activity_title">COMPETITIONS</string>
+    <string name="add_buddiz_api_key">48e87d6d-fe9f-40bb-8c8a-518adbe28cf1</string>
+    <string name="banner_ad_unit_id">ca-app-pub-3893444652657860/3255980635</string>
+
 </resources>

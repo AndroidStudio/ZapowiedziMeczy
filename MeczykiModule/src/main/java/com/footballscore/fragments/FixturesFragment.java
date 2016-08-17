@@ -22,7 +22,6 @@ import com.network.library.NetworkManagerCallbacks;
 import java.util.ArrayList;
 
 public class FixturesFragment extends Fragment {
-    public static final String TAG = "PreviewsFragment";
 
     @Nullable
     @Override
@@ -33,7 +32,7 @@ public class FixturesFragment extends Fragment {
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity().getDrawable(R.drawable.separator)));
+        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity().getResources().getDrawable(R.drawable.separator)));
         recyclerView.setAdapter(competitionsAdapter);
         return view;
     }
