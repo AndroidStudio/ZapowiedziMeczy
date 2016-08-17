@@ -50,15 +50,27 @@
         android:textColor="#999"
         android:textSize="12dp" />
 
-    <ImageView
-        android:id="@+id/selectImageButton"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+    <Button
+        android:id="@+id/showFixturesButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:background="@null"
-        android:paddingBottom="15dp"
-        android:paddingLeft="18dp"
-        android:paddingRight="17dp"
-        android:src="@drawable/ic_action_select" />
+        android:layout_marginRight="10dp"
+        android:background="@drawable/bg_selector_02"
+        android:padding="5dp"
+        android:text="Show\nFixtures"
+        android:textSize="14dp" />
 
+    <Button
+        android:id="@+id/showTableButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="5dp"
+        android:layout_toLeftOf="@+id/showFixturesButton"
+        android:background="@drawable/bg_selector_02"
+        android:padding="5dp"
+        android:text="League\nTable"
+        android:textSize="14dp" />
 </RelativeLayout>
