@@ -37,8 +37,8 @@ public class CompetitionsViewHolder extends RecyclerView.ViewHolder {
     public void onBind(final CompetitionsModel competitionsModel, final Context context) {
         this.captionTextView.setText(competitionsModel.getCaption());
         this.matchDayTextView.setText(String.valueOf("Match day: " + competitionsModel.getCurrentMatchday() + "/" + competitionsModel.getNumberOfMatchdays()));
-        this.numberOfTeamsTextView.setText(String.valueOf("Number of teams: " + competitionsModel.getNumberOfTeams()));
-        this.numberOfGamesTextView.setText(String.valueOf("Number of games: " + competitionsModel.getNumberOfGames()));
+        this.numberOfTeamsTextView.setText(String.valueOf("Teams: " + competitionsModel.getNumberOfTeams()));
+        this.numberOfGamesTextView.setText(String.valueOf("Games: " + competitionsModel.getNumberOfGames()));
 
         this.showFixturesButton.setOnClickListener(new View.OnClickListener() {
             @Override
