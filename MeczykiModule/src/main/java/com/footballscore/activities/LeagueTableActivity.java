@@ -38,7 +38,9 @@ public class LeagueTableActivity extends BaseActivity {
     }
 
     private void onCreateAdd() {
-        AdBuddiz.showAd(this);
+        if (showAdvertise())
+            AdBuddiz.showAd(this);
+        updateAdvertiseCounter();
     }
 
     private void onCreateLeagueTable() {
